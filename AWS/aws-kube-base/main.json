@@ -1,0 +1,35 @@
+{
+  "variables": {
+    "aws_profile": "",
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "profile": "{{user `aws_profile`}}",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-west-2",
+    "source_ami": "ami-a1234567",
+    "instance_type": "t2.medium",
+    "launch_block_device_mappings": [{
+        "delete_on_termination": true,
+        "device_name": "/dev/sda1",
+        "volume_size": 15,
+        "volume_type": "gp2"
+      }],
+    "ssh_username": "centos",
+    "ssh_pty": "true",
+    "subnet_id": "subnet-12345678",
+    "vpc_id": "vpc-12345678",
+    "ami_name": "centos7-base-201802b",
+    "tags": {
+       "Release": "{{timestamp}}"
+     }
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "script": "scripts/builder.sh",
+    "pause_before": "10s"
+  }]
+}

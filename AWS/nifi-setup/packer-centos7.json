@@ -1,0 +1,28 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-west-2",
+    "source_ami": "ami-c1234567",
+    "instance_type": "t2.small",
+    "ssh_username": "centos",
+    "ssh_pty": "true",
+    "subnet_id": "subnet-12345678",
+    "vpc_id": "vpc-12345678",
+    "ami_name": "nifi-1.2-centos7-{{timestamp}}",
+    "tags": {
+       "Name": "nifi-1.2_centos7x86_64",
+       "Release": "nifi-1.2:01"
+        }
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "script": "scripts/install_software.sh",
+    "pause_before": "10s"
+  }]
+}
