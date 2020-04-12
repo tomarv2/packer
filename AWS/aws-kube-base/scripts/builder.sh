@@ -5,7 +5,7 @@
 #sudo bash -c "echo 'preserve_hostname: true' >> /etc/cloud/cloud.cfg"
 sudo bash -c "setenforce 0; sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config"
 sudo bash -c "echo 'prepend domain-name-servers 10.11.12.13;' >> /etc/dhcp/dhclient.conf"
-sudo bash -c "echo 'supersede domain-search \"aws.tomarv2.com,demo.com,demo.tomarv2.com,tomarv2.com\";' >> /etc/dhcp/dhclient.conf"
+sudo bash -c "echo 'supersede domain-search \"aws.demo.com,demo.com,demo.demo.com,demo.com\";' >> /etc/dhcp/dhclient.conf"
 
 ### Add public key for root@master.aur ###
 sudo bash -c "mkdir -p /root/.ssh; chmod 700 /root/.ssh;"
